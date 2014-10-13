@@ -125,6 +125,13 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	for _, c := range cookies {
 		w.Header().Set("Set-Cookie", c.String())
 	}
+
+	// Handle CORS
+	if _, ok := r.Header["Origin"]; ok {
+ 		w.Header().Set("Access-Control-Allow-Origin", r.Header["Origin"][0])
+ 		w.Header().Set("Access-Control-Allow-Credentials", "true")
+	}
+
 	conn.serveHTTP(w, r)
 }
 
