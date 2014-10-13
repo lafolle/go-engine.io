@@ -130,6 +130,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if _, ok := r.Header["Origin"]; ok {
  		w.Header().Set("Access-Control-Allow-Origin", r.Header["Origin"][0])
  		w.Header().Set("Access-Control-Allow-Credentials", "true")
+ 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	}
 
 	conn.serveHTTP(w, r)
